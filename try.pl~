@@ -1,0 +1,106 @@
+:- dynamic ab_p/1. /*abdominal pain */
+:- dynamic ac_r/1. /* acid reflux */
+:- dynamic ane/1. /* anemia */
+:- dynamic anx/1. /* anxiety */
+:- dynamic b_p/1. /* back pain */
+:- dynamic bloat/1. /* bloating */
+:- dynamic bl_f/1. /* bloody feces */
+:- dynamic bl_u/1. /* bloody urine */
+:- dynamic bu_s/1. /* burning sensation from urination */
+:- dynamic c_p/1. /* chest pain */
+:- dynamic ch/1. /* chills */
+:- dynamic cl_u/1. /* cloudy urine */
+:- dynamic conf/1. /* confusion */
+:- dynamic conv/1. /* convulsion */
+:- dynamic cou/1. /* coughing */
+:- dynamic cou_b/1. /* coughing blood */
+:- dynamic deh/1. /* dehydration */
+:- dynamic dia/1. /* diarrhea */
+:- dynamic d_bth/1. /*difficulty breathing */
+:- dynamic e_b/1. /* easy bruising */
+:- dynamic e_s/1. /* excessive salivation */
+:- dynamic f_o_w/1. /* fear of water */
+:- dynamic ha/1. /* hallucinations */
+:- dynamic head/1. /* headache */
+:- dynamic heart/1. /* heartburn */
+:- dynamic h_f/1. /* high fever */
+:- dynamic hyp/1. /* hyperactivity */
+:- dynamic ind/1. /* indigestion (dyspepsia ) */
+:- dynamic ins/1. /* insomnia */
+:- dynamic irr/1. /* irritability */
+:- dynamic irr_e/1. /* irritated eyes */
+:- dynamic jau/1. /* jaundice */
+:- dynamic j_p/1. /* joint pain */
+:- dynamic k_s/1. /* koplik's spots (white spots in mouth) */
+:- dynamic l_s/1. /* legs stiffness */
+:- dynamic le/1. /* lethargy */
+:- dynamic l_o_a/1. /* loss of appetite */
+:- dynamic l_o_w/1. /* loss of weight */
+:- dynamic l_b_p/1. /* low blood pressure */
+:- dynamic muc/1. /* mucus */
+:- dynamic m_a/1. /* muscle ache */
+:- dynamic nau/1. /* nausea */
+:- dynamic n_p/1. /* neck pain */
+:- dynamic n_s/1. /* night sweats */
+:- dynamic p_f_e/1. /* pain from eating */
+:- dynamic p_f_i/1. /* pain from intercourse */
+:- dynamic p_f_u/1. /* pain from urinating */
+:- dynamic p_f/1. /* pale face */
+:- dynamic p_p/1. /* partial paralysis */
+:- dynamic p_s/1. /* profuse sweating */
+:- dynamic p_b_o_s/1. /* purple bruises on skin */
+:- dynamic p_d/1. /* pus-like discharge */
+:- dynamic r_h_r/1. /* rapid heart rate */
+:- dynamic ra/1. /* rashes */
+:- dynamic r_f/1. /* rice-water feces */
+:- dynamic r_n/1. /* runny nose */
+:- dynamic sez/1. /* seizures */
+:- dynamic s_t_l/1. /* sensitivity to light */
+:- dynamic s_o_b/1. /* shortness of breath */
+:- dynamic sl/1. /* sleepiness */
+:- dynamic s_a/1. /* sore anus / rectal pain */
+:- dynamic s_g/1. /* sore genitals */
+:- dynamic s_t/1. /* sore throat */
+:- dynamic s_n/1. /* stiff neck */
+:- dynamic t/1. /* tiredness */
+:- dynamic w/1.
+
+/* the following code is for testing purposes only,
+ *  to start the program, call 'start.' from consult console.
+*/
+d_bth(sample).  /* difficulty breathing */
+s_o_b(sample). /* shortness of breath */
+w(sample).
+
+asthma(X) :- d_bth(X),
+    s_o_b(X),
+    w(X),
+    write('You may have asthma.').
+
+yes(ye).
+
+start :-
+    yes(ye),
+    write('common things wrong: '), nl,
+    write('1. difficulty_breathing'), nl,
+    write('2. shortness_of_breath'), nl,
+    write('3. wheezing'), nl.
+
+difficulty_breathing :-
+    yes(ye),
+    assert(d_bth(user)).
+
+shortness_of_breath :-
+    yes(ye),
+    assert(s_o_b(user)).
+
+wheezing :-
+    yes(ye),
+    assert(w(user)).
+
+consult :-
+    asthma(user),
+    fail,
+    write('you do not have asthma').
+
+
