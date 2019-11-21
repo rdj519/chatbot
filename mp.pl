@@ -467,14 +467,14 @@ others_category :-
                 write('noted.'), nl,
                 choose_category.
 
-/* only up to here is valid code */
-
+/* only up to here is valid code
 consult(X):- /* this method is error pa */
      asthma(X) -> write('You have asthma')./* not defined yet */
 
 
 
 
+*/
 
 
 
