@@ -13,6 +13,187 @@ asthma(X) :-
     has(X, tiredness),
     has(X, wheezing).
 
+cholera(X) :-
+    has(X, abdominal_pain),
+    has(X, dehydration),
+    has(X, diarrhea),
+    has(X, high_fever),
+    has(X, irritability),
+    has(X, loss_of_weight),
+    has(X, low_blood_pressure),
+    has(X, nausea),
+    has(X, rapid_heart_rate),
+    has(X, rice_water_feces),
+    has(X, seizures),
+    (   has(X, sleepiness) ; has(X, tiredness)),
+    has(X, sore_anus).
+
+bronchitis(X) :-
+    has(X, chest_pain),
+    has(X, chills),
+    has(X, confusion),
+    has(X, coughing),
+    has(X, difficulty_breathing),
+    has(X, headache),
+    has(X, high_fever),
+    has(X, mucus),
+    has(X, muscle_ache),
+    has(X, runny_nose),
+    has(X, shortness_of_breath),
+    has(X, sore_throat),
+    has(X, tiredness),
+    has(X, wheezing).
+
+dengue(X) :-
+    has(X, abdominal_pain),
+    has(X, easy_bruising),
+    has(X, headache),
+    has(X, high_fever),
+    has(X, irritability),
+    (   has(X, joint_pain) ; has(X, muscle_ache) ; has(X, muscle_weakness)),
+    has(X, loss_of_appetite),
+    has(X, nausea),
+    has(X, rashes),
+    has(X, tiredness).
+
+gonnorhea(X) :-
+    has(X, abdominal_pain),
+    has(X, bloody_urine),
+    has(X, burning_sensation_from_urination),
+    has(X, hyperactivity),
+    has(X, pain_from_intercourse),
+    has(X, pain_from_urinating),
+    has(X, pus_like_discharge),
+    has(X, sore_anus).
+
+hiv(X) :-
+    has(X, chills),
+    has(X, diarrhea),
+    has(X, high_fever),
+    has(X, loss_of_weight),
+    has(X, night_sweats),
+    has(X, purple_bruises_on_skin),
+    has(X, rashes),
+    has(X, shortness_of_breath),
+    has(X, sore_anus),
+    has(X, sore_genitals),
+    has(X, sore_throat),
+    has(X, tiredness).
+
+leptospirosis(X) :-
+    has(X, chills),
+    has(X, diarrhea),
+    has(X, headache),
+    has(X, high_fever),
+    has(X, irritated_eyes),
+    has(X, jaundice),
+    has(X, loss_of_appetite),
+    has(X, muscle_ache),
+    has(X, nausea),
+    has(X, rashes).
+
+malaria(X) :-
+    has(X, abdominal_pain),
+    has(X, anemia),
+    has(X, bloody_feces),
+    has(X, chest_pain),
+    has(X, chills),
+    has(X, convulsion),
+    has(X, coughing),
+    has(X, diarrhea),
+    has(X, headache),
+    has(X, high_fever),
+    has(X, muscle_ache),
+    has(X, nausea),
+    has(X, profuse_sweating),
+    has(X, tiredness).
+
+measles(X) :-
+    has(X, coughing),
+    has(X, high_fever),
+    has(X, irritated_eyes),
+    has(X, koplik_spots),
+    has(X, rashes),
+    has(X, runny_nose),
+    has(X, sore_throat).
+
+meningitis(X) :-
+    has(X, confusion),
+    has(X, headache),
+    has(X, high_fever),
+    has(X, lethargy),
+    has(X, loss_of_appetite),
+    has(X, nausea),
+    has(X, purple_bruises_on_skin),
+    has(X, seizures),
+    has(X, sensitivity_to_light),
+    has(X, sleepiness),
+    has(X, stiff_neck).
+
+polio(X) :-
+    has(X, back_pain),
+    has(X, difficulty_breathing),
+    has(X, headache),
+    has(X, high_fever),
+    has(X, joint_pain),
+    has(X, legs_stiffness),
+    has(X, muscle_ache),
+    has(X, neck_pain),
+    has(X, partial_paralysis),
+    has(X, sore_throat),
+    has(X, stiff_neck),
+    has(X, tiredness).
+
+rabies(X) :-
+    has(X, anxiety),
+    has(X, confusion),
+    has(X, convulsion),
+    ( has(X, coughing) ; has(X, sore_throat)),
+    has(X, difficulty_breathing),
+    has(X, excessive_salivation),
+    has(X, fear_of_water),
+    has(X, hallucinations),
+    has(X, headache),
+    has(X, high_fever),
+    has(X, hyperactivity),
+    has(X, insomnia),
+    has(X, nausea).
+
+tuborculosis(X) :-
+    (   has(X, chest_pain) ; has(X, shortness_of_breath)),
+    has(X, chills),
+    has(X, coughing),
+    has(X, coughing_blood),
+    has(X, high_fever),
+    has(X, loss_of_appetite),
+    has(X, loss_of_weight),
+    has(X, night_sweats),
+    has(X, tiredness).
+
+ulcer(X) :-
+    (   has(X, acid_reflux) ; has(X, heartburn)),
+    (   has(X, anemia); has(X, pale_face); has(X, shortness_of_breath); has(X, tiredness)),
+    has(X, bloating),
+    (   has(X, bloody_feces) ; has(X, burning_sensation_from_urination)),
+    has(X, heartburn),
+    has(X, indigestion),
+    has(X, loss_of_appetite),
+    has(X, loss_of_weight),
+    has(X, nausea),
+    has(X, pain_from_eating).
+
+uti(X) :-
+    has(X, abdominal_pain),
+    has(X, burning_sensation_from_urination),
+    has(X, cloudy_urine),
+    has(X, high_fever),
+    has(X, muscle_ache),
+    has(X, nausea),
+    has(X, pain_from_urinating),
+    has(X, stiff_neck),
+    has(X, tiredness).
+
+/* this is only a sample func */
 headPain(X) :-
     has(X, headache),
     write(' You have headache.'), nl.
