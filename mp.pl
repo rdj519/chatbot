@@ -22,7 +22,7 @@ start :- choose_category.
 retract_symptom(X, Y) :-
     retract(has(X,Y)).
 
-choose_category:- write('Pick a category'), nl,
+choose_category :- write('Pick a category'), nl,
               write('1. Head'), nl,
               write('2. Upper Body'), nl,
 	      write('3. Lower Body'), nl,
@@ -36,7 +36,8 @@ choose_category:- write('Pick a category'), nl,
               nl, nl, write('11. consult'), nl,
 	      read(X),
 	      nl, /* for now head category is the only available */
-	      (X == 1 -> head_category; nl).
+	      (X == 1 -> head_category;
+               X == 2 -> upper_body_category; nl).
 
 head_category :- /* not yet done because we can retract symptoms */
 		write('Do you have headache?'), nl,
@@ -62,9 +63,106 @@ head_category :- /* not yet done because we can retract symptoms */
                 (G == yes -> assert(has(patient, sensitivity_to_light)), nl;  nl),
                 write('Do you have stiff neck? '), nl,
                 read(H), nl,
-                (H == yes -> assert(has(patient, stiff_neck)), nl; nl), nl,
+                (H == yes -> assert(has(patient, stiff_neck)), nl; nl),
                 write('noted.'), nl,
                 choose_category.
+
+upper_body_category :-
+                write('Do you have back pain?'), nl,
+                read(A), nl,
+                (   A == yes -> assert(has(patient, back_pain)), nl; nl),
+                write('Do you have chest pain?'), nl,
+                read(B), nl,
+                (   B == yes -> assert(has(patient, chest_pain)), nl; nl),
+                write('Do you experience heartburn?'), nl,
+                read(C), nl,
+                (   C == yes -> assert(has(patient, heartburn)), nl; nl),
+                write('noted.'), nl,
+                choose_category.
+
+lower_body_category :-
+                write('Do you have legs stiffness?'), nl,
+                read(A), nl,
+                (   A == yes -> assert(has(patient, leggs_stiffness)), nl; nl),
+                write('noted.'), nl,
+                choose_category.
+
+respiratory_system_category :-
+                write('Do you have persistent coughing?'), nl,
+                read(A), nl,
+                (   A == yes -> assert(has(patient, coughing)), nl; nl),
+                write('Do you cough blood? '), nl,
+                read(B), nl,
+                (   B == yes -> assert(has(patient, coughing_blood)), nl; nl),
+                write('Do you have difficulty breathing?'), nl,
+                read(C), nl,
+                (   C == yes -> assert(has(patient, difficulty_breathing)), nl; nl),
+                write('Do you experience shortness of breath?'), nl,
+                read(D), nl,
+                (   D == yes -> assert(has(patient, shortness_of_breath)), nl; nl),
+                write('Do you have a sore throat?'), nl,
+                read(E), nl,
+                (   E == yes -> assert(has(patient, sore_throat)), nl; nl),
+                write('Do you experience wheezing when breathing?'), nl,
+                read(F), nl,
+                (   F == yes -> assert(has(patient, wheezing)), nl; nl),
+                write('noted.'), nl,
+                choose_category.
+
+genitals_category :-
+                write('Do you feel burning sensation when urinating?'), nl,
+                read(A), nl,
+                (   A == yes -> assert(has(patient, burning_sensation_from_urination)), nl; nl),
+                write('Do you experience pain from intercourse?'), nl,
+                read(B), nl,
+                (   B == yes -> assert(has(patient, pain_from_intercourse)), nl; nl),
+                write('Do you experience pain from urinating?'), nl,
+                read(C), nl,
+                (   C == yes -> assert(has(patient, pain_from_urinating)), nl; nl),
+                write('Do you have a sore anus or feel rectal pain?'), nl,
+                read(D), nl,
+                (   D == yes -> assert(has(patient, sore_anus)), nl; nl),
+                write('Do you have sore genitals?'), nl,
+                read(E), nl,
+                (   E == yes -> assert(has(patient, sore_genitals)), nl; nl),
+                write('noted.'),nl,
+                choose_category.
+
+digestive_system_category :-
+                write('Do you feel abdominal pain?'), nl,
+                read(A), nl,
+                (   A == yes -> assert(has(patient, abdominal_pain)), nl; nl),
+                write('Do you experience acid reflux?'), nl,
+                read(B), nl,
+                (   B == yes -> assert(has(patient, acid_reflux)), nl; nl),
+                write('Do you experience bloating?'), nl,
+                read(C), nl,
+                (   C == yes -> assert(has(patient, bloating)), nl; nl),
+                write('Do you have diarrhea?'), nl,
+                read(D), nl,
+                (   D == yes -> assert(has(patient, diarrhea)), nl; nl),
+                write('Do you experience excessive salivation?'), nl,
+                read(E), nl,
+                (   E == yes -> assert(has(patient, excessive_salivation)), nl; nl),
+                write('Do you experience indigestion?'), nl,
+                read(F), nl,
+                (   F == yes -> assert(has(patient, indigestion)), nl; nl),
+                write('Do you experience loss of appetite?'), nl,
+                read(G), nl,
+                (   G == yes -> assert(has(patient, loss_of_appetite)), nl; nl),
+                write('Do you experience pain from eating?'), nl,
+                read(H), nl,
+                (   H == yes -> assert(has(patient, pain_from_eating)), nl; nl),
+                write('noted.'), nl,
+                choose_category.
+
+
+
+
+
+
+
+
 
 
 
