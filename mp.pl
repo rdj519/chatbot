@@ -37,7 +37,16 @@ choose_category :- write('Pick a category'), nl,
 	      read(X),
 	      nl, /* for now head category is the only available */
 	      (X == 1 -> head_category;
-               X == 2 -> upper_body_category; nl).
+               X == 2 -> upper_body_category;
+               X == 3 -> lower_body_category;
+               X == 4 -> respiratory_system_category;
+               X == 5 -> genitals_category;
+               X == 6 -> digestive_system_category;
+               X == 7 -> psychological_category;
+               X == 8 -> skin_and_muscles_category;
+               X == 9 -> discharge_category;
+               X == 10 -> others_category;
+               X == 11 -> consult(patient)).
 
 head_category :- /* not yet done because we can retract symptoms */
 		write('Do you have headache?'), nl,
@@ -156,6 +165,131 @@ digestive_system_category :-
                 write('noted.'), nl,
                 choose_category.
 
+psychological_category :-
+                write('Are you anxious?'), nl,
+                read(A), nl,
+                (   A == yes -> assert(has(patient, anxiety)), nl; nl),
+                write('Do you feel confusion?'), nl,
+                read(B), nl,
+                (   B == yes -> assert(has(patient, confusion)), nl; nl),
+                write('Do you experience fear of water?'), nl,
+                read(C), nl,
+                (   C == yes -> assert(has(patient, fear_of_water)), nl; nl),
+                write('Are you experiencing hallucinations?'), nl,
+                read(D), nl,
+                (   D == yes -> assert(has(patient, hallucinations)), nl; nl),
+                write('Do you experience hyperactivity?'), nl,
+                read(E), nl,
+                (   E == yes -> assert(has(patient, hyperactivity)), nl; nl),
+                write('Are you experiencing insomnia?'), nl,
+                read(F), nl,
+                (   F == yes -> assert(has(patient, insomnia)), nl; nl),
+                write('Do you experience irritability?'), nl,
+                read(G), nl,
+                (   G == yes -> assert(has(patient, irritability)), nl; nl),
+                write('Do you experience pain lethargy?'), nl,
+                read(H), nl,
+                (   H == yes -> assert(has(patient, lethargy)), nl; nl),
+                write('Do you experience sleepiness?'), nl,
+                read(I), nl,
+                (   I == yes -> assert(has(patient, sleepiness)), nl; nl),
+                write('Do you experience tiredness?'), nl,
+                read(J), nl,
+                (   J == yes -> assert(has(patient, tiredness)), nl; nl),
+                write('noted.'), nl,
+                choose_category.
+
+skin_and_muscles_category :-
+                write('Do you feel convulsion from your muscles?'), nl,
+                read(A), nl,
+                (   A == yes -> assert(has(patient, convulsion)), nl; nl),
+                write('Is your skin easily bruised?'), nl,
+                read(B), nl,
+                (   B == yes -> assert(has(patient, easy_bruising)), nl; nl),
+                write('Does your skin show jaundice?'), nl,
+                read(C), nl,
+                (   C == yes -> assert(has(patient, jaundice)), nl; nl),
+                write('Are you experiencing pain from joints?'), nl,
+                read(D), nl,
+                (   D == yes -> assert(has(patient, joint_pain)), nl; nl),
+                write('Do you experience muscle ache?'), nl,
+                read(E), nl,
+                (   E == yes -> assert(has(patient, muscle_ache)), nl; nl),
+                write('Are you experiencing partial paralysis (from any part of your body)?'), nl,
+                read(F), nl,
+                (   F == yes -> assert(has(patient, partial_paralysis)), nl; nl),
+                write('Do you have purple bruises on skin?'), nl,
+                read(G), nl,
+                (   G == yes -> assert(has(patient, purple_bruises_on_skin)), nl; nl),
+                write('Do you have skin rashes?'), nl,
+                read(H), nl,
+                (   H == yes -> assert(has(patient, rashes)), nl; nl),
+                write('noted.'), nl,
+                choose_category.
+
+discharge_category :-
+                write('Do you have bloody feces (even ocassionally or once)?'), nl,
+                read(A), nl,
+                (   A == yes -> assert(has(patient, bloody_feces)), nl; nl),
+                write('Do you have bloody urine (even ocassionally or once)?'), nl,
+                read(B), nl,
+                (   B == yes -> assert(has(patient, bloody_urine)), nl; nl),
+                write('Do you have cloudy urine (even ocassionally or once)?'), nl,
+                read(C), nl,
+                (   C == yes -> assert(has(patient, cloudy_urine)), nl; nl),
+                write('Does your spit or sneeze contain mucus?'), nl,
+                read(D), nl,
+                (   D == yes -> assert(has(patient, mucus)), nl; nl),
+                write('Do you have a pus-like discharge on your genitals?'), nl,
+                read(E), nl,
+                (   E == yes -> assert(has(patient, pus_like_discharge)), nl; nl),
+                write('Do you have rice-water feces?'), nl,
+                read(F), nl,
+                (   F == yes -> assert(has(patient, rice_water_feces)), nl; nl),
+                write('noted.'), nl,
+                choose_category.
+
+others_category :-
+                write('Do you have anemia?'), nl,
+                read(A), nl,
+                (   A == yes -> assert(has(patient, anemia)), nl; nl),
+                write('Do you have chills?'), nl,
+                read(B), nl,
+                (   B == yes -> assert(has(patient, chills)), nl; nl),
+                write('Do you have dehydration?'), nl,
+                read(C), nl,
+                (   C == yes -> assert(has(patient, dehydration)), nl; nl),
+                write('Do you have high fever(check for body temperature)?'), nl,
+                read(D), nl,
+                (   D == yes -> assert(has(patient, high_fever)), nl; nl),
+                write('Do you have koplik\'s spots (white spots in mouth)?'), nl,
+                read(E), nl,
+                (   E == yes -> assert(has(patient, koplik_spots)), nl; nl),
+                write('Did you have a rapid or significant loss of weight?'), nl,
+                read(F), nl,
+                (   F == yes -> assert(has(patient, loss_of_weight)), nl; nl),
+                write('Do you have low blood pressure(check for low blood pressure)?'), nl,
+                read(G), nl,
+                (   G == yes -> assert(has(patient, low_blood_pressure)), nl; nl),
+                write('Do you have nausea or any inclination to vomit?'), nl,
+                read(H), nl,
+                (   H == yes -> assert(has(patient, nausea)), nl; nl),
+                write('Do you experience night sweats?'), nl,
+                read(I), nl,
+                (   I == yes -> assert(has(patient, night_sweats)), nl; nl),
+                write('Do you sweat profusely?'), nl,
+                read(J), nl,
+                (   J == yes -> assert(has(patient, profuse_sweating)), nl; nl),
+                write('Do you have a rapid heart rate(check using stethoscope)?'), nl,
+                read(J), nl,
+                (   J == yes -> assert(has(patient, rapid_heart_rate)), nl; nl),
+                write('noted.'), nl,
+                choose_category.
+
+/* only up to here is valid code */
+
+consult(X):- /* this method is error pa */
+     asthma(X) -> write('You have asthma')./* not defined yet */
 
 
 
