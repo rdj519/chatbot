@@ -1,10 +1,17 @@
 :- dynamic has/2.
 :- dynamic person/1.
-:- dynamic patient/6.
-
 
 has(person, symptom).
-patient(name, age, height, weight, gender, bp).
+
+
+start :-
+    choose_category.
+
+/*optional function to retract a symptom (in case of accidentally checking a symptom) */
+retract_symptom(X, Y) :-
+    retract(has(X,Y)).
+
+/* straightforward diagnosis on fixed number of symptoms */
 
 asthma(X) :-
     has(X, chest_pain),
@@ -195,31 +202,135 @@ uti(X) :-
     has(X, stiff_neck),
     has(X, tiredness).
 
-/* this is only a sample func */
-headPain(X) :-
+/* if not all symptoms are checked, check if the basis (required) symptoms for the disease are checked, and then the succeeding symptoms.
+    This checks for a 'mild' or 'high' chance that the patient would be having that disease (different from a 'severe' version of that disease). */
+check_asthma(X) :-
+    has(X, chest_pain),
+    has(X, difficulty_breathing),
+    has(X, shortness_of_breath),
+    (   (has(X, coughing) ; has(X, pale_face); has(X, tiredness); has(X, wheezing)) -> write('High Chance of') ; write('Mild Chance of')).
+
+check_cholera(X) :-
+    has(X, abdominal_pain),
+    has(X, dehydration),
+    has(X, diarrhea),
+    has(X, high_fever),
+    has(X, low_blood_pressure),
+    (   (has(X, irritability) ; has(X, loss_of_weight); has(X, nausea); has(rapid_heart_rate); has(rice_water_feces); has(X, seizures)) -> write('High Chance of'); write('Mild Chance of')).
+
+check_bronchitis(X) :-
+    has(X, chest_pain),
+    has(X, coughing),
+    has(X, difficulty_breathing),
+    has(X, mucus),
+    has(X, shortness_of_breath),
+    has(X, sore_throat),
+    has(X, wheezing),
+    (    (has(X, chills); has(X, confusion); has(X, headache); has(X, high_fever); has(X, muscle_ache); has(X, runny_nose); has(X, tiredness)) -> write('High Chance of') ; write('Mild Chance of') ).
+
+check_dengue(X) :-
+    has(X, easy_bruising),
+    has(X, irritability),
+    has(X, nausea),
+    has(X, rashes),
+    (   (has(X, abdominal_pain) ; has(X, headache); has(X, high_fever); has(X, joint_pain); has(X, muscle_ache); has(X, muscle_weakness); has(X, loss_of_appetite); has(X, tiredness)) -> write('High Chance of'); write('Mild Chance of')).
+
+check_gonnorhea(X) :-
+    has(X, bloody_urine),
+    has(X, burning_sensation_from_urination),
+    has(X, pain_from_intercourse),
+    has(X, pus_like_discharge),
+    (   (has(X, abdominal_pain); has(X, hyperactivity); has(X, pain_from_urinating); has(X, sore_anus)) -> write('High Chance of'); write('Mild Chance of')).
+
+check_hiv(X) :-
+    has(X, loss_of_weight),
+    has(X, purple_bruises_on_skin),
+    has(X, rashes),
+    has(X, sore_anus),
+    has(X, sore_genitals),
+    has(X, tiredness),
+    (   (has(X, chills); has(X, diarrhea); has(X, high_fever); has(X, night_sweats); has(X, shortness_of_breath); has(X, sore_throat_)) -> write('High Chance of'); write('Mild Chance of')).
+
+check_leptospirosis(X) :-
+    has(X, chills),
     has(X, headache),
-    write(' You have headache.'), nl.
+    has(X, jaundice),
+    has(X, muscle_ache),
+    has(X, rashes),
+    (   (has(X, diarrhea); has(X, high_fever); has(X, irritated_eyes); has(X, loss_of_appetite); has(X, nausea)) -> write('High Chance of'); write('Mild Chance of')).
 
-start :-
-    /*
-    write('Name of the patient: '),nl,
-    read(A),
-    write('Age: '),nl,
-    read(B),
-    write('Height (in cm): '),nl,
-    read(C),
-    write('Weight (in kg): '),nl,
-    read(D),
-    write('Gender (male or female): '),nl,
-    read(E),
-    write('Blood pressure: '), nl,
-    read(F),
-    assert(patient(A, B, C, D, E, F)), */
-    choose_category.
+check_malaria(X) :-
+    has(X, anemia),
+    has(X, bloody_feces),
+    has(X, chest_pain),
+    has(X, convulsion),
+    has(X, diarrhea),
+    has(X, muscle_ache),
+    has(X, profuse_sweating),
+    (   (has(X, abdominal_pain); has(X, chills); has(X, coughing); has(X, headache); has(X, nausea); has(X, tiredness)) -> write('High Chance of'); write('Mild Chance of')).
+
+check_measles(X) :-
+    has(X, high_fever),
+    has(X, koplik_spots),
+    has(X, rashes),
+    has(X, runny_nose),
+    (   (has(X, coughing); has(X, irritated_eyes); has(X, sore_throat)) -> write('High Chance of'); write('Mild Chance of')).
+
+check_meningitis(X) :-
+    has(X, confusion),
+    has(X, headache),
+    has(X, lethargy),
+    has(X, seizures),
+    has(X, sensitivity_to_light),
+    has(X, sleepiness),
+    has(X, stiff_neck),
+    (   (has(X, high_fever); has(X, loss_of_appetite); has(X, nausea); has(X, purple_bruises_on_skin)) -> write('High Chance of'); write('Mild Chance of')).
+
+check_polio(X) :-
+    has(X, back_pain),
+    has(X, joint_pain),
+    has(X, legs_stiffness),
+    has(X, partial_paralysis),
+    has(X, stiff_neck),
+    (   (has(X, difficulty_breathing); has(X, headache); has(X, high_fever); has(X, sore_throat); has(X, tiredness)) -> write('High Chance of'); write('Mild Chance of')).
+
+check_rabies(X) :-
+    has(X, anxiety),
+    has(X, confusion),
+    has(X, convulsion),
+    has(X, excessive_salivation),
+    has(X, fear_of_water),
+    has(X, hallucinations),
+    has(X, hyperactivity),
+    has(X, insomnia),
+    (   (has(X, coughing); has(X, difficulty_breathing); has(X, headache); has(X, high_fever); has(X, nausea)) -> write('High Chance of'); write('Mild Chance of')).
+
+check_tuborculosis(X) :-
+    (   has(X, chest_pain) ; has(X, shortness_of_breath)),
+    has(X, chills),
+    has(X, coughing),
+    has(X, coughing_blood),
+    has(X, high_fever),
+    (   (has(X, loss_of_appetite); has(X, loss_of_weight); has(X, night_sweats); has(X, tiredness)) -> write('High Chance of'); write('Mild Chance of')).
+
+check_ulcer(X) :-
+    (   has(X, acid_reflux) ; has(X, heartburn)),
+    (   has(X, anemia); has(X, pale_face); has(X, shortness_of_breath); has(X, tiredness)),
+    has(X, bloating),
+    (   has(X, bloody_feces) ; has(X, burning_sensation_from_urination)),
+    has(X, heartburn),
+    has(X, indigestion),
+    has(X, loss_of_appetite),
+    (   (has(X, loss_of_weight); has(X, nausea); has(X, pain_from_eating)) -> write('High Chance of'); write('Mild Chance of')).
+
+check_uti(X) :-
+    has(X, burning_sensation_from_urination),
+    has(X, cloudy_urine),
+    has(X, pain_from_urinating),
+    (   (has(X, abdominal_pain); has(X, high_fever); has(X, muscle_ache); has(X, nausea); has(X, stiff_neck); has(X, tiredness)) -> write('High Chance of'); write('Mild Chance of')).
 
 
-retract_symptom(X, Y) :-
-    retract(has(X,Y)).
+/* chooses category to diagnose */
 
 choose_category :- write('Pick a category'), nl,
               write('1. Head'), nl,
@@ -246,29 +357,33 @@ choose_category :- write('Pick a category'), nl,
                X == 9 -> discharge_category;
                X == 10 -> others_category;
                X == 11 -> consult(patient)).
+/*diagnosis */
 
 consult(X) :-
        write('-----Diagnosis-----'),nl, write('Possible diseases: '), nl,
-       (   asthma(X) -> write('Asthma'), nl ; nl),
-       (   cholera(X) -> write('Cholera'),nl ; nl),
-       (   bronchitis(X) -> write('Acute Bronchitis'), nl ; nl),
-       (   dengue(X) -> write('Dengue'), nl ; nl),
-       (   gonnorhea(X) -> write('Gonnorhea'), nl ; nl),
-       (   hiv(X) -> write('HIV'), nl ; nl),
-       (   leptospirosis(X) -> write('Leptospirosis'), nl ; nl),
-       (   malaria(X) -> write('Malaria'), nl ; nl),
-       (   measles(X) -> write('Measles'), nl ; nl),
-       (   meningitis(X) -> write('Meningitis'), nl ; nl),
-       (   polio(X) -> write('Polio'), nl ; nl),
-       (   rabies(X) -> write('Rabies'), nl ; nl),
-       (   tuborculosis(X) -> write('Tuborculosis'), nl ; nl),
-       (   ulcer(X) -> write('Stomach Ulcer'), nl ; nl),
-       (   uti(X) -> write('Urinary Track Infection (UTI)'), nl ; nl),nl.
+       (   asthma(X) -> write('Asthma'), nl ; check_asthma(X) -> write(' Asthma'), nl; nl),
+       (   cholera(X) -> write('Cholera'),nl ; check_cholera(X) -> write(' Cholera'), nl; nl),
+       (   bronchitis(X) -> write('Acute Bronchitis'), nl ; check_bronchitis(X) -> write(' Acute Bronchitis'), nl; nl),
+       (   dengue(X) -> write('Dengue'), nl ; check_dengue(X) -> write(' Dengue'), nl; nl),
+       (   gonnorhea(X) -> write('Gonnorhea'), nl ; check_gonnorhea(X) -> write(' Gonnorhea'), nl; nl),
+       (   hiv(X) -> write('HIV'), nl ; check_hiv(X) -> write(' HIV'), nl; nl),
+       (   leptospirosis(X) -> write('Leptospirosis'), nl ; check_leptospirosis(X) -> write(' Leptospirosis'), nl; nl),
+       (   malaria(X) -> write('Malaria'), nl ; check_malaria(X) -> write(' Malaria'), nl;  nl),
+       (   measles(X) -> write('Measles'), nl ; check_measles(X) -> write(' Measles'), nl; nl),
+       (   meningitis(X) -> write('Meningitis'), nl ; check_meningitis(X) -> write(' Meningitis'), nl; nl),
+       (   polio(X) -> write('Polio'), nl ; check_polio(X) -> write(' Polio'), nl; nl),
+       (   rabies(X) -> write('Rabies'), nl ; check_rabies(X) -> write(' Rabies'), nl; nl),
+       (   tuborculosis(X) -> write('Tuborculosis'), nl ; check_tuborculosis(X) -> write(' Tuborculosis'), nl;  nl),
+       (   ulcer(X) -> write('Stomach Ulcer'), nl ; check_ulcer(X) -> write(' Ulcer'), nl;  nl),
+       (   uti(X) -> write('Urinary Track Infection (UTI)'), nl ; check_uti(X) -> write(' Urinary track Infection (UTI)'), nl;  nl),nl.
 
-head_category :- /* different categories based on symptoms */
-		write('Do you have headache?'), nl,
-		read(A),nl, /*; A == no -> has(patient, headache) -> retract(has(patient, headache));.. */
-		(A == yes -> assert(has(patient, headache)),nl ; nl),
+
+/* different categories based on symptoms */
+
+head_category :-
+                write('Do you have headache?'), nl,
+		read(A),nl,
+                (A == yes -> assert(has(patient, headache)),nl ; nl),
 		write('Are your eyes (or either of your eyes) irritated? '), nl,
 		read(B), nl,
 		(B == yes -> assert(has(patient, irritated_eyes)), nl; nl),
@@ -309,7 +424,7 @@ upper_body_category :-
 lower_body_category :-
                 write('Do you have legs stiffness?'), nl,
                 read(A), nl,
-                (   A == yes -> assert(has(patient, leggs_stiffness)), nl; nl),
+                (   A == yes -> assert(has(patient, legs_stiffness)), nl; nl),
                 write('noted.'), nl,
                 choose_category.
 
@@ -502,18 +617,6 @@ others_category :-
                 (   J == yes -> assert(has(patient, rapid_heart_rate)), nl; nl),
                 write('noted.'), nl,
                 choose_category.
-
-
-/* only up to here is valid code
-consult(X):- /* this method is error pa */
-     asthma(X) -> write('You have asthma')./* not defined yet */
-
-
-
-
-*/
-
-
 
 
 
