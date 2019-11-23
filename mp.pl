@@ -1,8 +1,10 @@
 :- dynamic has/2.
 :- dynamic person/1.
+:- dynamic patient/6.
 
 
 has(person, symptom).
+patient(name, age, height, weight, gender, bp).
 
 asthma(X) :-
     has(X, chest_pain),
@@ -198,7 +200,23 @@ headPain(X) :-
     has(X, headache),
     write(' You have headache.'), nl.
 
-start :- choose_category.
+start :-
+    /*
+    write('Name of the patient: '),nl,
+    read(A),
+    write('Age: '),nl,
+    read(B),
+    write('Height (in cm): '),nl,
+    read(C),
+    write('Weight (in kg): '),nl,
+    read(D),
+    write('Gender (male or female): '),nl,
+    read(E),
+    write('Blood pressure: '), nl,
+    read(F),
+    assert(patient(A, B, C, D, E, F)), */
+    choose_category.
+
 
 retract_symptom(X, Y) :-
     retract(has(X,Y)).
@@ -229,7 +247,25 @@ choose_category :- write('Pick a category'), nl,
                X == 10 -> others_category;
                X == 11 -> consult(patient)).
 
-head_category :- /* not yet done because we can retract symptoms */
+consult(X) :-
+       write('-----Diagnosis-----'),nl, write('Possible diseases: '), nl,
+       (   asthma(X) -> write('Asthma'), nl ; nl),
+       (   cholera(X) -> write('Cholera'),nl ; nl),
+       (   bronchitis(X) -> write('Acute Bronchitis'), nl ; nl),
+       (   dengue(X) -> write('Dengue'), nl ; nl),
+       (   gonnorhea(X) -> write('Gonnorhea'), nl ; nl),
+       (   hiv(X) -> write('HIV'), nl ; nl),
+       (   leptospirosis(X) -> write('Leptospirosis'), nl ; nl),
+       (   malaria(X) -> write('Malaria'), nl ; nl),
+       (   measles(X) -> write('Measles'), nl ; nl),
+       (   meningitis(X) -> write('Meningitis'), nl ; nl),
+       (   polio(X) -> write('Polio'), nl ; nl),
+       (   rabies(X) -> write('Rabies'), nl ; nl),
+       (   tuborculosis(X) -> write('Tuborculosis'), nl ; nl),
+       (   ulcer(X) -> write('Stomach Ulcer'), nl ; nl),
+       (   uti(X) -> write('Urinary Track Infection (UTI)'), nl ; nl),nl.
+
+head_category :- /* different categories based on symptoms */
 		write('Do you have headache?'), nl,
 		read(A),nl, /*; A == no -> has(patient, headache) -> retract(has(patient, headache));.. */
 		(A == yes -> assert(has(patient, headache)),nl ; nl),
@@ -368,7 +404,7 @@ psychological_category :-
                 write('Do you experience irritability?'), nl,
                 read(G), nl,
                 (   G == yes -> assert(has(patient, irritability)), nl; nl),
-                write('Do you experience pain lethargy?'), nl,
+                write('Do you experience lethargy?'), nl,
                 read(H), nl,
                 (   H == yes -> assert(has(patient, lethargy)), nl; nl),
                 write('Do you experience sleepiness?'), nl,
@@ -466,6 +502,7 @@ others_category :-
                 (   J == yes -> assert(has(patient, rapid_heart_rate)), nl; nl),
                 write('noted.'), nl,
                 choose_category.
+
 
 /* only up to here is valid code
 consult(X):- /* this method is error pa */
